@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2021 at 07:58 AM
+-- Generation Time: Jan 13, 2022 at 07:09 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.8
 
@@ -36,18 +36,6 @@ CREATE TABLE `booking` (
   `roomid` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `booking`
---
-
-INSERT INTO `booking` (`id`, `endDate`, `startDate`, `status`, `customerid`, `roomid`) VALUES
-(1, '2021-12-24', '2021-12-22', NULL, 'CO1', 'Room1'),
-(2, '2021-12-25', '2021-12-22', NULL, 'CO2', 'Room2'),
-(3, '2021-12-24', '2021-12-22', NULL, 'CO1', 'Room3'),
-(4, '2021-12-26', '2021-12-22', NULL, 'CO2', 'Room4'),
-(5, '2021-12-24', '2021-12-23', NULL, 'CO3', 'Room5'),
-(8, NULL, NULL, 'AVAILABLE', NULL, 'Room5');
-
 -- --------------------------------------------------------
 
 --
@@ -68,9 +56,34 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`customerid`, `contact`, `customerCategory`, `firstname`, `lastname`) VALUES
 ('CO1', '0785047581', 0, 'Alvaro', 'Eric'),
-('CO2', '0785043214', 2, 'Emmy', 'James'),
-('CO3', '0785412698', 2, 'Ange', 'Uwase'),
-('CO4', '078889556', 0, 'Eric', 'Abizera');
+('CO2', '0782317775', 1, 'Ariwabo', 'Arnauld');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee`
+--
+
+CREATE TABLE `employee` (
+  `id` bigint(20) NOT NULL,
+  `date` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`id`, `date`, `email`, `password`, `phone`, `username`) VALUES
+(1, '1999-04-07', 'alvaroeric71@gmail.com', 'alvaro12', '0785047581', 'Alvaro'),
+(2, '2000-02-29', 'alvaro@gmail.com', 'ERICK12@', '0785437581', 'Eric'),
+(3, '1997-06-29', 'james@gmail.com', '123456', '0788545626', 'James'),
+(4, '1997-04-30', 'hakimu14@gmail.com', '789456', '0785461233', 'Kalisa '),
+(5, '1999-06-30', 'armelabizera@gmail.com', '123456', '0785412369', 'Armel'),
+(6, '2004-04-30', 'abdmuv@gmail.com', '123456', '0785412369', 'Armand');
 
 -- --------------------------------------------------------
 
@@ -92,11 +105,7 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`roomid`, `available`, `beds`, `capacity`, `price`, `status`) VALUES
-('Room1', b'0', 1, 'ONE_BEDRM', 10000, 'OCCUPIED'),
-('Room2', b'0', 2, 'TWO_BEDRM', 20000, 'OCCUPIED'),
-('Room3', b'0', 3, 'THREE_BEDRM', 30000, 'OCCUPIED'),
-('Room4', b'0', 4, 'PENTHOUSE', 100000, 'OCCUPIED'),
-('Room5', b'0', 3, 'THREE_BEDRM', 30000, 'AVAILABLE');
+('Room1', b'0', 1, 'ONE_BEDRM', 10000, 'AVAILABLE');
 
 -- --------------------------------------------------------
 
@@ -159,6 +168,12 @@ ALTER TABLE `customer`
   ADD PRIMARY KEY (`customerid`);
 
 --
+-- Indexes for table `employee`
+--
+ALTER TABLE `employee`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `room`
 --
 ALTER TABLE `room`
@@ -184,7 +199,13 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `employee`
+--
+ALTER TABLE `employee`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
