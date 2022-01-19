@@ -120,7 +120,7 @@ public class GenericDao<A> {
     }
     public Room findRoomById(String roomId){
       Session s = HibernateUtil.getSessionFactory().openSession();
-      String hql="from room where roomid='"+roomId+"'";
+      String hql="from Room where roomid='"+roomId+"'";
       Query query=s.createQuery(hql);
       return (Room) query.uniqueResult();
     }

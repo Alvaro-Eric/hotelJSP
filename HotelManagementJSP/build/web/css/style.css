@@ -1,6 +1,6 @@
 /* Website template by freewebsitetemplates.com */
 body {
-	background: #ffb744 url(../images/bg-body.jpg) repeat left bottom;
+	background: #ffb744 url(../images/bg-pattern.jpg) repeat left bottom;
 	font-family: "Times New Roman", Times, serif;
 	margin: 0;
 }
@@ -44,20 +44,22 @@ img {
 	background: url(../images/bg-navigation.png) no-repeat;
 	clear: both;
 	height: 50px;
-	width: 860px;
+	width: 760px;
 	margin: 0 auto;
 	padding: 1px;
 }
 #navigation ul {
-	display: inline-block;
-	width: 860px;
+/*	display: inline-block;*/
+/*	width: 560px;*/
+        position: absolute;
+        right: 30%;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 #navigation li {
 	float: left;
-	background-position: 0 -118px;
+/*	background-position: 0 -118px;*/
 	background-repeat: no-repeat;
 	height: 49px;
 	width: 122px;
@@ -74,8 +76,7 @@ img {
 	color: #fff;
 	display: block;
 	font: bold 14px/48px Arial, Helvetica, sans-serif;
-	height: 49px;
-	text-decoration: none;
+	height: 0px;
 	text-transform: uppercase;
 }
 #navigation li a:hover {

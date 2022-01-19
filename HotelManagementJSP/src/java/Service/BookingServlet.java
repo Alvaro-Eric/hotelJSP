@@ -5,6 +5,8 @@
  */
 package Service;
 
+import Dao.BookingInterface;
+import Dao.BookingRes;
 import Dao.GenericDao;
 import Dao.connectDB;
 import Model.AvailableStatus;
@@ -43,11 +45,13 @@ public class BookingServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     GenericDao<Booking> bkDao = new GenericDao<>(Booking.class);
+    BookingInterface bki = new BookingRes();
     Customer c = new Customer();
     Room r = new Room();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,7 +66,7 @@ public class BookingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**
@@ -76,26 +80,41 @@ public class BookingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       try {
-            
-            
-           } catch (Exception e) {
-            System.out.println(""+e);
-        }
-        response.sendRedirect("Rooms.jsp");   
-    }
-    public void allOccupied(){
+        try {
+            String cs = request.getParameter("customerid");
+            String rm = request.getParameter("roomid");
+            String d1 = request.getParameter("sdate");
+            String d2 = request.getParameter("edate");
+            String sts = request.getParameter("rmStatus");
+            AvailableStatus st = AvailableStatus.valueOf(sts);
+            if(st.equals(AvailableStatus.OCCUPIED)){
+              boolean booking = bki.occupiedRoom(cs,rm, d1, d2);
+              if(booking){
+              allOccupied();
+              return;
+              }else{
+              return ;
+               
+              }
 
-      try{
-            PreparedStatement p =  connectDB.getCon().prepareStatement("select  b.id as Id,b.customerid as CustomerId,"
+            }  
+        } catch (Exception e) {
+            System.out.println("" + e);
+        }
+        response.sendRedirect("index.html");
+    }
+
+    public void allOccupied() {
+
+        try {
+            PreparedStatement p = connectDB.getCon().prepareStatement("select  b.id as Id,b.customerid as CustomerId,"
                     + "b.roomid as Room,b.startdate as StartDate,b.enddate as EndDate,r.price as PayPerDay,DATEDIFF(b.enddate,b.startdate)*r.price"
                     + " as TotPrice from Booking b, Room r where r.roomid = b.roomid");
             ResultSet rs = p.executeQuery();
-            
+
 //            TransactionTable.setModel(DbUtils.resultSetToTableModel(rs));
-         
-        }catch(Exception e){
-          e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

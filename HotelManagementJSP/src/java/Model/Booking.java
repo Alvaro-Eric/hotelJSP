@@ -37,10 +37,7 @@ public class Booking implements Serializable {
     @Enumerated(EnumType.STRING)
     private AvailableStatus status;
 
-    public Booking(Long id, Room room, Customer customer, String startDate, String endDate, AvailableStatus status) {
-        this.id = id;
-        this.room = room;
-        this.customer = customer;
+    public Booking(String startDate, String endDate, AvailableStatus status) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
