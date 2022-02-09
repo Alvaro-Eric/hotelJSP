@@ -46,10 +46,9 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/internhip?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
-    <mapping class="Model.Staff"/>
     <mapping class="Model.Room"/>
     <mapping class="Model.Customer"/>
     <mapping class="Model.Booking"/>
-    <mapping class="Model.CustomerCategory"/>
+    <mapping class="Model.Staff"/>
   </session-factory>
 </hibernate-configuration>

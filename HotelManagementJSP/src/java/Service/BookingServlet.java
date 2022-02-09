@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -80,6 +81,7 @@ public class BookingServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         RequestDispatcher rd;
         try {
             String cs = request.getParameter("customerid");
             String rm = request.getParameter("roomid");
@@ -90,32 +92,23 @@ public class BookingServlet extends HttpServlet {
             if(st.equals(AvailableStatus.OCCUPIED)){
               boolean booking = bki.occupiedRoom(cs,rm, d1, d2);
               if(booking){
-              allOccupied();
               return;
               }else{
               return ;
                
               }
-
-            }  
+                
+            }
+            
         } catch (Exception e) {
-            System.out.println("" + e);
+//            request.setAttribute("SUCCESS", e.getMessage());
+            request.setAttribute("This room is Occupied", e.getMessage());
+            rd = request.getRequestDispatcher("Booking.jsp");
+            rd.forward(request, response);
+            response.sendRedirect("Booking.jsp");
+//            System.out.println("" + e);
         }
-        response.sendRedirect("index.html");
-    }
-
-    public void allOccupied() {
-
-        try {
-            PreparedStatement p = connectDB.getCon().prepareStatement("select  b.id as Id,b.customerid as CustomerId,"
-                    + "b.roomid as Room,b.startdate as StartDate,b.enddate as EndDate,r.price as PayPerDay,DATEDIFF(b.enddate,b.startdate)*r.price"
-                    + " as TotPrice from Booking b, Room r where r.roomid = b.roomid");
-            ResultSet rs = p.executeQuery();
-
-//            TransactionTable.setModel(DbUtils.resultSetToTableModel(rs));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        
     }
 
     /**

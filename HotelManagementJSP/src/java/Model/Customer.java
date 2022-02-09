@@ -7,6 +7,8 @@ package Model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 /**
@@ -20,9 +22,16 @@ public class Customer implements Serializable {
     private String firstname;
     private String lastname;
     private String contact;
+//    @Enumerated(EnumType.STRING)
     private CustomerCategory customerCategory;
-
     public Customer() {
+    }
+
+    public Customer(String customerid, String firstname, String lastname, String contact) {
+        this.customerid = customerid;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.contact = contact;
     }
 
     public Customer(String customerid, String firstname, String lastname, String contact, CustomerCategory customerCategory) {
@@ -32,6 +41,8 @@ public class Customer implements Serializable {
         this.contact = contact;
         this.customerCategory = customerCategory;
     }
+    
+    
 
     public Customer(String customerid, CustomerCategory customerCategory) {
         this.customerid = customerid;
@@ -81,6 +92,8 @@ public class Customer implements Serializable {
     public void setCustomerCategory(CustomerCategory customerCategory) {
         this.customerCategory = customerCategory;
     }
+
+    
     
     
     

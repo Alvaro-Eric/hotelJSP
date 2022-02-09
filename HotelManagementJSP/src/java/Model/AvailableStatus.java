@@ -10,5 +10,5 @@ package Model;
  * @author Alvaro
  */
 public enum AvailableStatus {
-    OCCUPIED,AVAILABLE
+        OCCUPIED,AVAILABLE
 }

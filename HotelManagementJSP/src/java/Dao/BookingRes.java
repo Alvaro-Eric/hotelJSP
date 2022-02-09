@@ -15,7 +15,9 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -25,9 +27,10 @@ public class BookingRes implements BookingInterface {
     GenericDao<Booking> bkingDao = new GenericDao<>(Booking.class);
     GenericDao<Room> rmDao = new GenericDao<>(Room.class);
     GenericDao<Customer> cusDao = new GenericDao<>(Customer.class);
-    
+     private Map<String, String> errors;
     Booking bking = new Booking();
     Customer cu = new Customer();
+    
     @Override
     public void availableRoom(String roomId) {
       Room rm = rmDao.findById(roomId);
@@ -35,10 +38,12 @@ public class BookingRes implements BookingInterface {
       bkingDao.createA(new Booking(rm, AvailableStatus.AVAILABLE));
       rm.setStatus(AvailableStatus.AVAILABLE);
       rmDao.updateA(rm);
+      
     }
 
     @Override
     public boolean occupiedRoom(String customerId ,String roomId, String startDate, String endDate) {
+     errors = new HashMap();
      Room rm = rmDao.findById(roomId);
      Booking book = bkingDao.findBookingByRoomId(roomId);
      Customer c = cusDao.findById(customerId);
@@ -47,14 +52,24 @@ public class BookingRes implements BookingInterface {
        throw new RuntimeException("We Don't have this Room");
      }
      if(startDate.compareTo(endDate)>0){
-        throw new RuntimeException("Invalid Dates");
+       throw new RuntimeException("Invalid Dates");
+//        errors.put("startdate","Invalid Dates");
      }
      if(startDate.compareTo(today)<0){
-        throw new RuntimeException("Booking don't work in past days");
+       throw new RuntimeException("Booking don't work in past days");
+//        errors.put("startdate", "Booking don't work in past days");
      }
-     if(rm.getStatus()== AvailableStatus.OCCUPIED && (startDate.equals(book.getEndDate())|| startDate.equals(book.getStartDate()))){
-       throw new RuntimeException("This room is Occupied");
-     } 
+     if(rm.getStatus()== AvailableStatus.OCCUPIED && (startDate.compareTo(book.getEndDate())<=0)){
+      throw new RuntimeException("This room is Occupied");
+//        errors.put("rm", "This room is Occupied");
+     }
+//     if(startDate.compareTo(book.getStartDate())==0 && (endDate.compareTo(book.getEndDate())==0)){
+//      throw new RuntimeException("Duplicate occurred");
+//     }
+     
+//     if (errors.isEmpty()) {
+//            return true;
+//        }
      
      bkingDao.createA(new Booking(rm, c, startDate, endDate));
      rm.setStatus(AvailableStatus.OCCUPIED);

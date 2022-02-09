@@ -40,10 +40,10 @@ public class CustomerServlet extends HttpServlet {
            String ln = request.getParameter("lastname");
            String ph = request.getParameter("contact");
            String csCat = request.getParameter("customerCat");
-           CustomerCategory cusCat = CustomerCategory.valueOf(csCat); 
+          CustomerCategory cusCat = CustomerCategory.valueOf(csCat); 
            
-           
-          csDao.createA(new Customer(cusId,fn,ln,ph,cusCat)) ;
+           csDao.createA(new Customer(cusId, fn, ln, ph, cusCat)) ;
+          
         } catch (Exception e) {
             System.out.println(""+e);
         }

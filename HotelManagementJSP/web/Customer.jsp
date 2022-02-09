@@ -23,34 +23,54 @@
         }
         #input{
             position: absolute;
-            top: 20%;
-            left:15%;
+            top: 15%;
+            left:10%;
 /*            margin-left: 80px;*/
             font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
             margin-top: 30px;
-            width: 125px;
+/*            width: 125px;*/
             color: black;
-            font-size: 30px;
+/*            font-size: 30px;*/
             font-weight: 700;
+        }
+        #input select {
+            height: 25px;
+            width: 77%;
+/*            padding: 10px;*/
+        }
+        #input tr td:nth-child(1){
+           width: 10%; 
+           font-size: 20px;
+        }
+        #input tr td:nth-child(2){
+           width: 15%; 
         }
         #custable{
             position: absolute;
-            top: 20%;
-            left: 45%;
-            font-size: 30px;
+            top: 15%;
+            left: 35%;
+            font-size: 20px;
 /*            margin-left: 80px;*/
             font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
             margin-top: 30px;
-            width: 125px;
+            width: 55%;
             color: black;
             font-weight: 700;
 
         }
+        #cust{
+          position: relative;
+          display: flex;
+          flex-direction: row;
+        }
         #navigation {
-	background: url(../images/bg-navigation.png) no-repeat;
+	background-image: url(../images/bg-navigation.png);
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
 	clear: both;
-	height: 50px;
-	width: 760px;
+	height: 70px;
+/*	width: 760px;*/
 	margin: 0 auto;
 	padding: 1px;
         }
@@ -91,7 +111,7 @@
         }
         #navigation li.selected a {
                 background-position: 0 0;
-                color: #e4e1bd;
+                color: grey;
         }
     </style>
     <body>
@@ -104,7 +124,7 @@
 				<div id="navigation">
 					<ul>
 						<li>
-							<a href="index.html">Home</a>
+							<a href="Welcome.jsp">Home</a>
 						</li>
 						<li>
 							<a href="Rooms.jsp">Rooms</a>
@@ -122,6 +142,7 @@
 			
                 </div>
         </div>
+        <div id="cust">
         <form action="Servlet" method="POST">
             <table id="input" border="0">
                 <%
@@ -134,7 +155,7 @@
                     <tr><td>Contact</td><td><input type="text" name="contact" value=""</td></tr>
                     <tr><td>Customer Category</td>
                         <td>
-                            <select name=" customerCat" >
+                            <select name="customerCat" >
                             <%   
                             for (CustomerCategory cc:Cat){
                             %>
@@ -176,5 +197,6 @@
             </table>
 
         </form>
+       </div>     
     </body>
 </html>

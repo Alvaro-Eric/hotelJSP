@@ -19,30 +19,42 @@
     <style>
         body{
             font-family: sans-serif;
-            background-image: url(rooms.png);
+            background-image: url(bg-pattern.jpg);
             background-size: cover;
         }
         #input{
             position: absolute;
-            top: 20%;
-            left:15%;
+            top: 15%;
+            left:10%;
 /*            margin-left: 80px;*/
             font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
             margin-top: 30px;
             width: 125px;
             color: black;
-            font-size: 30px;
+            font-size: 15px;
             font-weight: 700;
+        }
+        #input select {
+            height: 25px;
+            width: 99%;
+/*            padding: 10px;*/
+        }
+        #input tr td:nth-child(1){
+           width: 10%; 
+           font-size: 20px;
+        }
+        #input tr td:nth-child(2){
+           width: 15%; 
         }
         #roomtable{
             position: absolute;
-            top: 20%;
-            left: 45%;
-            font-size: 30px;
+            top: 15%;
+            left: 35%;
+            font-size: 20px;
 /*            margin-left: 80px;*/
             font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
             margin-top: 30px;
-            width: 125px;
+            width: 55%;
             color: black;
             font-weight: 700;
 
@@ -73,10 +85,13 @@
           background: black;
         }*/
         #navigation {
-	background: url(../images/bg-navigation.png) no-repeat;
+	background-image: url(../images/bg-navigation.png);
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: cover;
 	clear: both;
-	height: 50px;
-	width: 760px;
+	height: 70px;
+/*	width: 760px;*/
 	margin: 0 auto;
 	padding: 1px;
         }
@@ -117,7 +132,7 @@
         }
         #navigation li.selected a {
                 background-position: 0 0;
-                color: #e4e1bd;
+                color: grey;
         }
     </style>
     <body>
@@ -130,7 +145,7 @@
 				<div id="navigation">
 					<ul>
 						<li>
-							<a href="index.html">Home</a>
+							<a href="Welcome.jsp">Home</a>
 						</li>
 						<li class="selected">
 							<a href="Rooms.jsp">Rooms</a>
