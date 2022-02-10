@@ -49,7 +49,7 @@ public class StaffServlet extends HttpServlet {
                 }
                 }catch(Exception e){
                     System.out.println(""+e);
-                    request.setAttribute("message","username or password is invalid!!");
+//                    request.setAttribute("message","username or password is invalid!!");
                 }
 //                break;
 //            case "logout":
